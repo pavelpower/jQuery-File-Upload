@@ -1039,20 +1039,19 @@
         },
 
         enable: function () {
-            var wasDisabled = false;
-            if (this.options.disabled) {
-                wasDisabled = true;
-            }
+            this.options.disabled = false;
+                
             $.Widget.prototype.enable.call(this);
-            if (wasDisabled) {
-                this._initEventHandlers();
-            }
+            
+            this.options.disabled
+                && this._initEventHandlers();
         },
 
         disable: function () {
-            if (!this.options.disabled) {
-                this._destroyEventHandlers();
-            }
+            this.options.disabled = true;
+            
+            this._destroyEventHandlers();
+            
             $.Widget.prototype.disable.call(this);
         },
 
